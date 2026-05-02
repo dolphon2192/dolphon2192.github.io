@@ -8,125 +8,252 @@
         padding: 20px;
         justify-content: left;
     }
+
     .recipe-card {
+        position: relative; /* 日付の位置の基準にする */
         border: 1px solid #ddd;
         border-radius: 8px;
         width: 150px;
         overflow: hidden;
         transition: transform 0.2s;
     }
+
     .recipe-card:hover {
         transform: translateY(-5px);
     }
+
     .recipe-card a { text-decoration: none; color: #333; }
+
+    .thumbnail-wrapper {
+        width: 100%;
+        height: 120px; /* ここで「画像エリア」の高さを全カード共通で固定します */
+        display: flex;
+        align-items: center; /* 画像が枠より小さい場合、上下中央に配置 */
+        justify-content: center;
+        background-color: #f9f9f9; /* 画像が小さい時の余白の色 */
+        overflow: hidden;    /* 万が一はみ出してもカットする */
+        position: relative;
+        /* 画像と文字エリアの間に隙間を作らせない */
+        line-height: 0;
+        font-size: 0;
+    }
+
     .thumbnail {
-    width: 100%;
-    height: 100px;
-    /* cover から contain に変更 */
-    object-fit: contain; 
-    /* 余白が目立つ場合は背景色をつけると綺麗です */
-    background-color: #f9f9f9; 
-}
-    .card-title { padding: 10px; font-weight: bold; }
+        max-width: 100%;     /* 親の幅を超えない */
+        max-height: 100%;    /* 親の高さを絶対に超えない */
+        object-fit: contain; 
+        /* 余白が目立つ場合は背景色をつけると綺麗です */
+        display: block;      /* ★画像の下に生まれる謎の隙間（数px）を消します */
+        margin: 0;
+        background-color: #f9f9f9; 
+    }
+
+    .card-body {
+        padding: 10px 10px 0px 10px;
+        min-height: 2.6em; /* 2行分の高さを確保（1.6行分 × 2） */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* 上揃えにする */
+        margin: 0;           /* 外側の余白をリセット */
+    }
+
+    .card-date {
+        font-size: 11px;    /* 日付は小さめに */
+        color: #888;        /* 色を薄くして控えめに */
+        margin-bottom: 4px; /* タイトルとの隙間 */
+    }
+
+    .card-date-badge {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        background: rgba(0, 0, 0, 0.6); /* 黒の半透明背景 */
+        color: #fff;
+        font-weight: bold;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 10px;
+        z-index: 10; /* 画像より上に表示 */
+    }
+
+    .card-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+        line-height: 1.4; /* 行間を一定にする */
+        margin: 0;
+    }
+
 </style>
 
 <div class="recipe-grid">
     
-    <div class="recipe-card">
-        <a href="pdfs/recipe_kyuri_to_wakame_no_sunomono.pdf" target="_blank">
-            <img src="images/thumb_kyuri_to_wakame_no_sunomono.png" class="thumbnail" alt="きゅうりとわかめの酢の物">
-            <div class="card-title">きゅうりとわかめの酢の物</div>
+<div class="recipe-card">
+        <a href="pdfs/recipe_kyuri.pdf" target="_blank">
+            <div class="card-date-badge">2026.02.26</div>
+            <div class="thumbnail-wrapper">
+                <img src="images/thumb_kyuri_to_wakame_no_sunomono.png" class="thumbnail" alt="きゅうりとわかめの酢の物">
+            </div>
+            <div class="card-body">
+                <div class="card-title">きゅうりとわかめの酢の物</div>
+            </div>
         </a>
     </div>
 
+
     <div class="recipe-card">
         <a href="pdfs/recipe_tuna_sandwich.pdf" target="_blank">
-            <img src="images/thumb_tuna_sandwich.png" class="thumbnail" alt="ツナサンド">
+            <div class="card-date-badge">2026.03.18</div>
+            <div class="thumbnail-wrapper">
+                <img src="images/thumb_tuna_sandwich.png" class="thumbnail" alt="ツナサンド">
+            </div>
+            <div class="card-body">
             <div class="card-title">ツナサンド</div>
+            </div>
         </a>
     </div>
 
     <div class="recipe-card">
         <a href="pdfs/recipe_parapara_tamago_charhan.pdf" target="_blank">
-            <img src="images/thumb_parapara_tamago_charhan.png" class="thumbnail" alt="パラパラたまごチャーハン">
+            <div class="card-date-badge">2026.03.02</div>
+            <div class="thumbnail-wrapper">
+                <img src="images/thumb_parapara_tamago_charhan.png" class="thumbnail" alt="パラパラたまごチャーハン">
+            </div>
+            <div class="card-body">
             <div class="card-title">パラパラたまごチャーハン</div>
+            </div>
         </a>
     </div>
 
     <div class="recipe-card">
         <a href="pdfs/recipe_hijiki_ni.pdf" target="_blank">
+            <div class="card-date-badge">2026.02.13</div>
+            <div class="thumbnail-wrapper">
             <img src="images/thumb_hijiki_ni.png" class="thumbnail" alt="ひじき煮">
+            </div>
+            <div class="card-body">
             <div class="card-title">ひじき煮</div>
+            </div>
         </a>
     </div>
 
     <div class="recipe-card">
         <a href="pdfs/recipe_fuki_to_aburaage_no_nimono.pdf" target="_blank">
+            <div class="card-date-badge">2026.03.03</div>
+            <div class="thumbnail-wrapper">
             <img src="images/thumb_fuki_to_aburaage_no_nimono.png" class="thumbnail" alt="ふきと油揚げの煮物">
+            </div>
+            <div class="card-body">
             <div class="card-title">ふきと油揚げの煮物 </div>
+            </div>
         </a>
     </div>
 
     <div class="recipe-card">
         <a href="pdfs/recipe_potato_gratin.pdf" target="_blank">
+            <div class="card-date-badge">2026.03.09</div>
+            <div class="thumbnail-wrapper">
             <img src="images/thumb_potato_gratin.png" class="thumbnail" alt="ポテトグラタン">
+            </div>
+            <div class="card-body">
             <div class="card-title">ポテトグラタン</div>
+            </div>
         </a>
     </div>
 
     <div class="recipe-card">
         <a href="pdfs/recipe_potato_salad.pdf" target="_blank">
+            <div class="card-date-badge">2026.02.17</div>
+            <div class="thumbnail-wrapper">
             <img src="images/thumb_potato_salad.png" class="thumbnail" alt="ポテトサラダ">
+            </div>
+            <div class="card-body">
             <div class="card-title">ポテトサラダ</div>
+            </div>
         </a>
     </div>
 
     <div class="recipe-card">
         <a href="pdfs/recipe_white_source.pdf" target="_blank">
+            <div class="card-date-badge">2026.03.05</div>
+            <div class="thumbnail-wrapper">
             <img src="images/thumb_white_source.png" class="thumbnail" alt="ホワイトソース">
+            </div>
+            <div class="card-body">
             <div class="card-title">ホワイトソース</div>
+            </div>
         </a>
     </div>
 
     <div class="recipe-card">
         <a href="pdfs/recipe_tamanegi_no_oyaki.pdf" target="_blank">
+            <div class="card-date-badge">2026.03.17</div>
+            <div class="thumbnail-wrapper">
             <img src="images/thumb_tamanegi_no_oyaki.png" class="thumbnail" alt="玉ねぎのお焼き">
+            </div>
+            <div class="card-body">
             <div class="card-title">玉ねぎのお焼き</div>
+            </div>
         </a>
     </div>
 
     <div class="recipe-card">
         <a href="pdfs/recipe_daikon_no_amazuduke.pdf" target="_blank">
+            <div class="card-date-badge">2026.01.25</div>
+            <div class="thumbnail-wrapper">
             <img src="images/thumb_daikon_no_amazuduke.png" class="thumbnail" alt="大根の甘酢漬け">
+            </div>
+            <div class="card-body">
             <div class="card-title">大根の甘酢漬け</div>
+            </div>
         </a>
     </div>
 
     <div class="recipe-card">
         <a href="pdfs/recipe_daikon_mochi.pdf" target="_blank">
+            <div class="card-date-badge">2026.02.26</div>
+            <div class="thumbnail-wrapper">
             <img src="images/thumb_daikon_mochi.png" class="thumbnail" alt="大根餅">
+            </div>
+            <div class="card-body">
             <div class="card-title">大根餅</div>
+            </div>
         </a>
     </div>
 
     <div class="recipe-card">
         <a href="pdfs/recipe_butabara_potato_salad.pdf" target="_blank">
+            <div class="card-date-badge">2026.03.11</div>
+            <div class="thumbnail-wrapper">
             <img src="images/thumb_butabara_potato_salad.png" class="thumbnail" alt="豚バラポテサラ">
+            </div>
+            <div class="card-body">
             <div class="card-title">豚バラポテサラ</div>
+            </div>
         </a>
     </div>
 
     <div class="recipe-card">
         <a href="pdfs/recipe_butabara_daikon.pdf" target="_blank">
+            <div class="card-date-badge">2026.03.04</div>
+            <div class="thumbnail-wrapper">
             <img src="images/thumb_butabara_daikon.png" class="thumbnail" alt="豚バラ大根">
+            </div>
+            <div class="card-body">
             <div class="card-title">豚バラ大根</div>
+            </div>
         </a>
     </div>
 
     <div class="recipe-card">
         <a href="pdfs/recipe_mahbohdoufu.pdf" target="_blank">
+            <div class="card-date-badge">2026.03.01</div>
+            <div class="thumbnail-wrapper">
             <img src="images/thumb_mahbohdoufu.png" class="thumbnail" alt="麻婆豆腐">
+            </div>
+            <div class="card-body">
             <div class="card-title">麻婆豆腐</div>
+            </div>
         </a>
     </div>
 
